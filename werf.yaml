@@ -1,14 +1,23 @@
 project: k8s-zero-to-hero
 configVersion: 1
 ---
-image: ubuntu-test
-from: ubuntu:22.04
+image: build
+from: golang:1.18-alpine
 git:
 - add: /
-  to: /
+  to: /app
 shell:
   install:
-  - apt update
-  - apt install -y curl vim
+  - cd /app
+  - go mod download
   setup:
-  - echo "Hello, world"
+  - cd /app
+  - go build -o /goapp cmd/main.go
+---
+image: app
+from: alpine:3.18
+import:
+- image: build
+  add: /goapp
+  to: /goapp
+  after: install
