@@ -10,3 +10,5 @@ shell:
   install:
   - apt update
   - apt install -y curl vim
+  setup:
+  - echo "Hello, world"
