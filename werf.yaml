@@ -2,4 +2,11 @@ project: k8s-zero-to-hero
 configVersion: 1
 ---
 image: ubuntu-test
-dockerfile: Dockerfile.test
+from: ubuntu:22.04
+git:
+- add: /
+  to: /
+shell:
+  install:
+  - apt update
+  - apt install -y curl
