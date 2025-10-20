@@ -9,4 +9,4 @@ git:
 shell:
   install:
   - apt update
-  - apt install -y curl
+  - apt install -y curl vim
