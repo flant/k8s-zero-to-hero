@@ -14,9 +14,12 @@ spec:
       labels:
         app: nginx
     spec:
+      imagePullSecrets:
+      - name: registrysecret
       containers:
-      - name: nginx
-        image: nginx:1.27
+      - name: app
+        image: {{ .Values.werf.image.app }}
+        command: ["/goapp"]
         ports:
         - containerPort: 80
 

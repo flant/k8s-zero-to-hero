@@ -16,6 +16,11 @@ shell:
 ---
 image: app
 from: alpine:3.18
+git:
+- add: /templates
+  to: /templates
+- add: /static
+  to: /static
 import:
 - image: build
   add: /goapp
