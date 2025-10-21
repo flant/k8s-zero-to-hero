@@ -1,0 +1,5 @@
+app:
+  replicas: 3
+  containerPort: 8080
+  servicePort: 80
+  domain: "web.test"

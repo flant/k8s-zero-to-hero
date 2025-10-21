@@ -1,17 +1,20 @@
+{{ $domain := .Values.app.domain }}
+{{ $servicePort := .Values.app.servicePort }}
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: web
+  name: {{ .Chart.Name }}-web
 spec:
   rules:
-  - host: web.test
+  - host: {{ $domain }}
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: web
+            name: {{ .Chart.Name }}-web
             port:
-              number: 80
+              number: {{ $servicePort }}
 
