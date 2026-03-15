@@ -1,7 +1,7 @@
 project: k8s-zero-to-hero
 configVersion: 1
 -----
-image: ubuntu-test
+image: ubuntu
 dockerfile: Dockerfile.test
 
 
