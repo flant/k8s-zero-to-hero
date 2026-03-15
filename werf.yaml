@@ -8,8 +8,9 @@ git:
   to: /
 shell:
   install:
-  - apt update
-  - apt install -y curl
+  - apt-get update
+  - apt-get install -y apt-utils
+  - apt-get install -y curl
 
 
 
