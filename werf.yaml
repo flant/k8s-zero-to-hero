@@ -13,13 +13,14 @@ shell:
   - apt-get install -y curl
   setup:   
   - echo "Helo world"
-  ---
-  from alpine:3.10
-  import:
-  - image: build
-    add: /goapp
-    to: /goapp
-    after: install
+---
+image: app
+from: alpine:3.18
+import:
+- image: build
+  add: /goapp
+  to: /goapp
+  after: install
 
 
 
