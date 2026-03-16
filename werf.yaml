@@ -11,6 +11,17 @@ shell:
   - apt-get update
   - apt-get install -y apt-utils
   - apt-get install -y curl
+  setup:   
+  - echo "Helo world"
+  ---
+  from alpine:3.10
+  import:
+  - image: build
+    add: /goapp
+    to: /goapp
+    after: install
+
+
 
 
 
