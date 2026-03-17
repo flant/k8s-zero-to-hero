@@ -15,7 +15,7 @@ spec:
         app: nginx
     spec:
       imagePullSecrets:
-      - name: registry-access
+      - name: registrysecret
       containers:
       - name: nginx
         image: {{ .Values.werf.image.app }}

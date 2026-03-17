@@ -10,7 +10,7 @@ shell:
   install:
   - cd /app
   - go mod download
-  setup:   
+setup:   
   - cd /app
   - go build -o /goapp cmd/main.go
 ---
