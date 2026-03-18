@@ -18,8 +18,7 @@ spec:
       - name: registrysecret
       containers:
       - name: nginx
-        image: nginx:1.27
-        # image: {{ .Values.werf.image.app }}
-        # command: ["/goapp"]
+        image: {{ .Values.werf.image.app }}
+        command: ["/goapp"]
         ports:
         - containerPort: 8080
