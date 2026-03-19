@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: web
   labels:
-    app: nginx
+    app: web
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: web
   template:
     metadata:
       labels:
-        app: nginx
+        app: web
     spec:
       imagePullSecrets:
       - name: registrysecret
