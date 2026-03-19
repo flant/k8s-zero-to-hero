@@ -3,14 +3,15 @@ kind: Ingress
 metadata:
   name: web
 spec:
+  ingressClassName: nginx
   rules:
-  - host: web.test
-  http:
-    paths:
-    - path: /
-      pathType: Prefix
-      backend:
-        service:
-        name: web
-        port:
-          number: 80
+    - host: web.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 80
