@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Chart.Name }}-web
 spec:
-  replicas: {{.Values.app.replicas}}
+  replicas: {{ .Values.app.replicas }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}-web
@@ -22,9 +22,10 @@ spec:
         command: ["/goapp"]
         ports:
         - name: app
-          containerPort: {{ .Values.app.containerPort}}
+          containerPort: {{ .Values.app.containerPort }}
       - name: nginx
-        image: {{ .Values.werf.image.nginx }}  
+        image: {{ .Values.werf.image.nginx }}
         ports:
         - name: http
           containerPort: {{ .Values.nginx.targetPort }}
+
