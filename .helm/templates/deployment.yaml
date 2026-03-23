@@ -14,6 +14,10 @@ spec:
       labels:
         app: {{ .Chart.Name }}-web
     spec:
+      volums:
+      - name: nginx-config
+        ConfigMap:
+          name: {{ .Chart.Name }}-nginx-config
       imagePullSecrets:
       - name: registrysecret
       containers:
@@ -28,4 +32,10 @@ spec:
         ports:
         - name: http
           containerPort: {{ .Values.nginx.targetPort }}
+        volumeMounts:
+        - name: nginx-config
+          mountPath: etc/nginx/nginx.config
+          subPath: nginx.config
+
+
 
