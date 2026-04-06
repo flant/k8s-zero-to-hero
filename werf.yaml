@@ -1,0 +1,33 @@
+project: k8s-zero-to-hero
+configVersion: 1
+---
+image: build
+from: golang:1.18-alpine
+git:
+- add: /
+  to: /app
+shell:
+  install:
+  - cd /app
+  - go mod download
+  setup:
+  - cd /app
+  - go build -o /goapp cmd/main.go
+---
+image: app
+from: alpine:3.18
+git:
+- add: /templates
+  to: /templates
+import:
+- image: build
+  add: /goapp
+  to: /goapp
+  after: install
+---
+image: nginx
+from: nginx:1.27
+git:
+- add: /static
+  to: /var/www/static
+

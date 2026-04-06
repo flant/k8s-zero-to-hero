@@ -1,0 +1,15 @@
+app:
+  replicas: 3
+  containerPort: 8080
+  servicePort: 80
+  domain: "web.test"
+  image:
+    repository: ghcr.io/zinam59/k8s-zero-to-hero-app
+    tag: latest
+nginx:
+  targetPort: 80
+  image:
+    repository: ghcr.io/zinam59/k8s-zero-to-hero-nginx
+    tag: latest
+
+

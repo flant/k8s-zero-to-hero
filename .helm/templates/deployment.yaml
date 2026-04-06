@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-web
+  labels:
+    app: {{ .Chart.Name }}-web
+spec:
+  replicas: {{ .Values.app.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-web
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-web
+    spec:
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: {{ .Chart.Name }}-nginx-conf
+      imagePullSecrets:
+      - name: registrysecret
+      containers:
+      - name: app
+        image: {{ .Values.app.image.repository }}:{{.Values.app.image.tag }}
+        command: ["/goapp"]
+        ports:
+        - name: app
+          containerPort: {{ .Values.app.containerPort }}
+      - name: nginx
+        image: {{ .Values.nginx.image.repository }}:{{.Values.nginx.image.tag }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.nginx.targetPort }}
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+
