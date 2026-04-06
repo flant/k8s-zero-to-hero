@@ -22,13 +22,13 @@ spec:
       - name: registrysecret
       containers:
       - name: app
-        image: {{ .Values.werf.image.app }}
+        image: {{ .Values.app.image.repository }}:{{.Values.app.image.tag }}
         command: ["/goapp"]
         ports:
         - name: app
           containerPort: {{ .Values.app.containerPort }}
       - name: nginx
-        image: {{ .Values.werf.image.nginx }}
+        image: {{ .Values.nginx.image.repository }}:{{.Values.nginx.image.tag }}
         ports:
         - name: http
           containerPort: {{ .Values.nginx.targetPort }}

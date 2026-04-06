@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k8s-zero-to-hero
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: k8s-zero-to-hero
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/zinam59/k8s-zero-to-hero
+    targetRevision: with-argo
+    path: .helm
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
