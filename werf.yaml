@@ -1,0 +1,33 @@
+project: k8s-zero-to-hero # имя werf-проекта (имя чарта)
+configVersion: 1
+---
+image: build   
+from: golang:1.18-alpine
+git:
+- add: /
+  to: /app
+shell:
+  install:
+  - cd /app
+  - go mod download
+  setup:
+  - cd /app
+  - go build -o /goapp cmd/main.go
+---
+image: app
+from: alpine:3.18
+import:
+- image: build
+  add: /goapp
+  to: /goapp
+  after: install
+- image: build
+  add: /app/templates
+  to: /app/templates
+  after: install
+- image: build
+  add: /app/static
+  to: /app/static
+  after: install
+docker:
+  WORKDIR: /app

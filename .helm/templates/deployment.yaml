@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment    # тип ресурса, манифест которого описываем
+metadata:
+  name: web
+  labels:
+    app: web      # 
+spec:
+  replicas: 3       # желаемое кол-во реплик, которое нам необходимо поддерживать
+  selector:         # 
+    matchLabels:
+      app: web
+  template:         # здесь указывается то, какие поды будут создаваться деплойментом
+    metadata:
+      labels:
+        app: web
+    spec:
+      imagePullSecrets: # указываем имя нашего секрета
+      - name: registrysecret # подсказка для k8s, что данные для авторизации в container registry находятся в registrysecret
+      containers:
+      - name: app 
+        image: {{ .Values.werf.image.app }} # шаблонная переменная Helm, которую werf автоматически заполняет именем Docker-образа, собранного для приложения app
+        command: ["/goapp"] # добавим команду для запуска приложения
+        ports:
+        - containerPort: 8080
